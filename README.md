@@ -1,4 +1,4 @@
-# Spring Boot - Api rest
+# Api rest - Spring Boot
 
 * API Rest em Java com Spring Boot
 * CRUDs utilizando o banco de dados MySQL
