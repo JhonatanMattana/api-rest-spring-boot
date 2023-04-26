@@ -1,5 +1,6 @@
 package com.api.clinica.model;
 
+import com.api.clinica.medico.dto.DadosAtualizacaoMedico;
 import com.api.clinica.medico.dto.DadosCadastroMedico;
 import com.api.clinica.medico.enums.Especialidade;
 
@@ -49,5 +50,19 @@ public class Medico {
 		this.crm = dados.crm();
 		this.especialidade = dados.especialidade();
 		this.endereco = new Endereco(dados.endereco());
+	}
+	
+	public void atualizarInformacoes(DadosAtualizacaoMedico dados) {
+		if (dados.nome() != null) {
+			this.nome = dados.nome();
+		}
+		
+		if (dados.telefone() != null) {
+			this.telefone = dados.telefone();
+		}
+		
+		if (dados.dadosEndereco() != null) {
+			this.endereco.atualizarInformacoes(dados.dadosEndereco());
+		}
 	}
 }

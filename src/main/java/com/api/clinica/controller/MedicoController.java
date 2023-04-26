@@ -6,10 +6,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.api.clinica.medico.dto.DadosAtualizacaoMedico;
 import com.api.clinica.medico.dto.DadosCadastroMedico;
 import com.api.clinica.medico.dto.DadosListagemMedico;
 import com.api.clinica.model.Medico;
@@ -32,5 +34,10 @@ public class MedicoController {
 	@GetMapping
 	public Page<DadosListagemMedico> listarTodos(@PageableDefault(size = 10, sort = {"nome"}) Pageable pageable) {
 		return medicoService.listarTodos(pageable).map(DadosListagemMedico::new);
+	}
+	
+	@PutMapping
+	public void atualizar(@RequestBody @Valid DadosAtualizacaoMedico dadosAtualizacaoMedico) {
+		medicoService.atualizar(dadosAtualizacaoMedico);
 	}
 }
