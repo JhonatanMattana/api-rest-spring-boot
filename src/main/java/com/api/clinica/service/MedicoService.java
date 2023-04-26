@@ -18,13 +18,13 @@ public class MedicoService {
 	@Autowired
 	private MedicoRepository medicoRepository;
 	
+	public Page<Medico> listarTodos(Pageable pageable) {
+		return medicoRepository.findAllByAtivoTrue(pageable);
+	}
+	
 	@Transactional
 	public void save(Medico medico) {
 		medicoRepository.save(medico);
-	}
-
-	public Page<Medico> listarTodos(Pageable pageable) {
-		return medicoRepository.findAll(pageable);
 	}
 
 	@Transactional
@@ -35,7 +35,8 @@ public class MedicoService {
 
 	@Transactional
 	public void excluir(Long id) {
-		medicoRepository.deleteById(id);
+		var medico = medicoRepository.getReferenceById(id);
+		medico.excluir();
 	}
 	
 }
