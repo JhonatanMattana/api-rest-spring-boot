@@ -28,9 +28,10 @@ public class MedicoService {
 	}
 
 	@Transactional
-	public void atualizar(@Valid DadosAtualizacaoMedico dadosAtualizacaoMedico) {
+	public Medico atualizar(@Valid DadosAtualizacaoMedico dadosAtualizacaoMedico) {
 		var medico = medicoRepository.getReferenceById(dadosAtualizacaoMedico.id());
 		medico.atualizarInformacoes(dadosAtualizacaoMedico);
+		return medico;
 	}
 
 	@Transactional

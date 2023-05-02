@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.api.clinica.medico.dto.DadosAtualizacaoMedico;
 import com.api.clinica.medico.dto.DadosCadastroMedico;
+import com.api.clinica.medico.dto.DadosDetalhamentoMedico;
 import com.api.clinica.medico.dto.DadosListagemMedico;
 import com.api.clinica.model.Medico;
 import com.api.clinica.service.MedicoService;
@@ -29,22 +32,31 @@ public class MedicoController {
 	private MedicoService medicoService;
 	
 	@PostMapping
-	public void cadastrar(@RequestBody @Valid DadosCadastroMedico dados) {
-		medicoService.save(new Medico(dados));
+	public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroMedico dados, UriComponentsBuilder uriBuilder) {
+		var medico = new Medico(dados);
+		
+		medicoService.save(medico);
+		
+		var uri = uriBuilder.path("/medicos/{id}").buildAndExpand(medico.getId()).toUri();
+		
+		return ResponseEntity.created(uri).body(new DadosDetalhamentoMedico(medico));
 	}
 	
 	@GetMapping
-	public Page<DadosListagemMedico> listarTodos(@PageableDefault(size = 10, sort = {"nome"}) Pageable pageable) {
-		return medicoService.listarTodos(pageable).map(DadosListagemMedico::new);
+	public ResponseEntity<Page<DadosListagemMedico>> listarTodos(@PageableDefault(size = 10, sort = {"nome"}) Pageable pageable) {
+		var page = medicoService.listarTodos(pageable).map(DadosListagemMedico::new);
+		return ResponseEntity.ok(page);
 	}
 	
 	@PutMapping
-	public void atualizar(@RequestBody @Valid DadosAtualizacaoMedico dadosAtualizacaoMedico) {
-		medicoService.atualizar(dadosAtualizacaoMedico);
+	public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizacaoMedico dadosAtualizacaoMedico) {
+		Medico medico = medicoService.atualizar(dadosAtualizacaoMedico);
+		return ResponseEntity.ok(new DadosDetalhamentoMedico(medico));
 	}
 	
 	@DeleteMapping("/{id}")
-	public void excluir(@PathVariable("id") Long id) {
+	public ResponseEntity excluir(@PathVariable("id") Long id) {
 		medicoService.excluir(id);
+		return ResponseEntity.noContent().build();
 	}
 }
