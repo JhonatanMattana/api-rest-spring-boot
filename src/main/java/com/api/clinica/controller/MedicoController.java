@@ -59,4 +59,10 @@ public class MedicoController {
 		medicoService.excluir(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity detalhar(@PathVariable Long id) {
+		var medico = medicoService.getById(id);
+		return ResponseEntity.ok(new DadosDetalhamentoMedico(medico));
+	}
 }

@@ -39,5 +39,9 @@ public class MedicoService {
 		var medico = medicoRepository.getReferenceById(id);
 		medico.excluir();
 	}
+
+	public Medico getById(Long id) {
+		return medicoRepository.getReferenceById(id);
+	}
 	
 }
