@@ -1,7 +1,7 @@
 package com.api.clinica.model;
 
 
-import com.api.clinica.endereco.dto.DadosEndereco;
+import com.api.clinica.dto.endereco.DadosEndereco;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;

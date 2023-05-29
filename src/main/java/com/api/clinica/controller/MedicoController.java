@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.api.clinica.medico.dto.DadosAtualizacaoMedico;
-import com.api.clinica.medico.dto.DadosCadastroMedico;
-import com.api.clinica.medico.dto.DadosDetalhamentoMedico;
-import com.api.clinica.medico.dto.DadosListagemMedico;
+import com.api.clinica.dto.medico.DadosAtualizacaoMedico;
+import com.api.clinica.dto.medico.DadosCadastroMedico;
+import com.api.clinica.dto.medico.DadosDetalhamentoMedico;
+import com.api.clinica.dto.medico.DadosListagemMedico;
 import com.api.clinica.model.Medico;
 import com.api.clinica.service.MedicoService;
 

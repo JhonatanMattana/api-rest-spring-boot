@@ -1,4 +1,4 @@
-package com.api.clinica.medico.dto;
+package com.api.clinica.dto.medico;
 
 import com.api.clinica.medico.enums.Especialidade;
 import com.api.clinica.model.Medico;

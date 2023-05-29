@@ -1,6 +1,6 @@
-package com.api.clinica.medico.dto;
+package com.api.clinica.dto.medico;
 
-import com.api.clinica.endereco.dto.DadosEndereco;
+import com.api.clinica.dto.endereco.DadosEndereco;
 import com.api.clinica.medico.enums.Especialidade;
 
 import jakarta.validation.Valid;

@@ -1,7 +1,7 @@
 package com.api.clinica.model;
 
-import com.api.clinica.medico.dto.DadosAtualizacaoMedico;
-import com.api.clinica.medico.dto.DadosCadastroMedico;
+import com.api.clinica.dto.medico.DadosAtualizacaoMedico;
+import com.api.clinica.dto.medico.DadosCadastroMedico;
 import com.api.clinica.medico.enums.Especialidade;
 
 import jakarta.persistence.Embedded;
