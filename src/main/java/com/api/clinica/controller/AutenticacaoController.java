@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.clinica.dto.autenticacao.DadosAutenticacao;
+import com.api.clinica.dto.security.DadosTokenJWT;
 import com.api.clinica.infra.security.TokenService;
 import com.api.clinica.model.Usuario;
 
@@ -27,9 +28,10 @@ public class AutenticacaoController  {
 	
 	@PostMapping
 	public ResponseEntity<?> efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
-		var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
-		var authenticate = manager.authenticate(token);
+		var authenticateToken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
+		var authenticate = manager.authenticate(authenticateToken);
 		
-		return ResponseEntity.ok(tokenService.gerarToken((Usuario) authenticate.getPrincipal()));
+		String tokenJWT = tokenService.gerarToken((Usuario) authenticate.getPrincipal());
+		return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
 	}
 }
