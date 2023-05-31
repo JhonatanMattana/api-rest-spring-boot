@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.clinica.dto.autenticacao.DadosAutenticacao;
+import com.api.clinica.infra.security.TokenService;
+import com.api.clinica.model.Usuario;
 
 import jakarta.validation.Valid;
 
@@ -20,11 +22,14 @@ public class AutenticacaoController  {
 	@Autowired
 	private AuthenticationManager manager;
 	
+	@Autowired
+	private TokenService tokenService;
+	
 	@PostMapping
-	public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
+	public ResponseEntity<?> efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
 		var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
 		var authenticate = manager.authenticate(token);
 		
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok(tokenService.gerarToken((Usuario) authenticate.getPrincipal()));
 	}
 }
