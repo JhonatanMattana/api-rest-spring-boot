@@ -11,3 +11,8 @@
 * Mecanismo de autenticação na API
 * Controle de acesso na API
 * Json Web Token para controlar o acesso na API
+* Princípios SOLID
+* API documentada seguindo o padrão OpenAPI
+* Testes automatizados com Spring Boot
+* Build com Spring Boot
+* Variáveis de ambiente em produção para o deploy
