@@ -32,7 +32,7 @@ public class MedicoController {
 	private MedicoService medicoService;
 	
 	@PostMapping
-	public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroMedico dados, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<?> cadastrar(@RequestBody @Valid DadosCadastroMedico dados, UriComponentsBuilder uriBuilder) {
 		var medico = new Medico(dados);
 		
 		medicoService.save(medico);
@@ -49,19 +49,19 @@ public class MedicoController {
 	}
 	
 	@PutMapping
-	public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizacaoMedico dadosAtualizacaoMedico) {
+	public ResponseEntity<?> atualizar(@RequestBody @Valid DadosAtualizacaoMedico dadosAtualizacaoMedico) {
 		Medico medico = medicoService.atualizar(dadosAtualizacaoMedico);
 		return ResponseEntity.ok(new DadosDetalhamentoMedico(medico));
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity excluir(@PathVariable("id") Long id) {
+	public ResponseEntity<?> excluir(@PathVariable("id") Long id) {
 		medicoService.excluir(id);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity detalhar(@PathVariable Long id) {
+	public ResponseEntity<?> detalhar(@PathVariable Long id) {
 		var medico = medicoService.getById(id);
 		return ResponseEntity.ok(new DadosDetalhamentoMedico(medico));
 	}
