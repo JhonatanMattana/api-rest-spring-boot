@@ -2,10 +2,13 @@ package com.api.clinica.consulta.validacoes;
 
 import java.time.DayOfWeek;
 
+import org.springframework.stereotype.Component;
+
 import com.api.clinica.dto.consulta.DadosAgendamentoConsulta;
 import com.api.clinica.infra.exception.ValidacaoException;
 
-public class ValidadorHorarioFuncionamentoClinica {
+@Component
+public class ValidadorHorarioFuncionamentoClinica implements ValidadorAgendamentoDeConsulta {
 
 	public void validar(DadosAgendamentoConsulta dados) {
 		var dataConsulta = dados.data();

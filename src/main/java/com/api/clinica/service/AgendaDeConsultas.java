@@ -1,8 +1,11 @@
 package com.api.clinica.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.api.clinica.consulta.validacoes.ValidadorAgendamentoDeConsulta;
 import com.api.clinica.dto.consulta.DadosAgendamentoConsulta;
 import com.api.clinica.infra.exception.ValidacaoException;
 import com.api.clinica.model.Consulta;
@@ -23,6 +26,9 @@ public class AgendaDeConsultas {
 	@Autowired
 	private PacienteRepository pacienteRepository;
 	
+	@Autowired
+	private List<ValidadorAgendamentoDeConsulta> validadores;
+	
 	public void agendar(DadosAgendamentoConsulta dados) {
 		if (!pacienteRepository.existsById(dados.idPaciente())) {
 			throw new ValidacaoException("ID do paciente informado não existe!");
@@ -31,6 +37,8 @@ public class AgendaDeConsultas {
 		if (dados.idMedico() != null && !medicoRepository.existsById(dados.idMedico())) {
 			throw new ValidacaoException("ID do médico informado não existe!");
 		}
+		
+		validadores.forEach(v -> v.validar(dados));
 		
 		var paciente = pacienteRepository.findById(dados.idPaciente()).get();
 		var medico = escolherMedico(dados);
