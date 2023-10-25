@@ -2,6 +2,8 @@ package com.api.clinica.dto.consulta;
 
 import java.time.LocalDateTime;
 
+import com.api.clinica.medico.enums.Especialidade;
+
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 
@@ -10,6 +12,7 @@ public record DadosAgendamentoConsulta(
 		@NotNull 
 		Long idPaciente, 
 		@NotNull @Future
-		LocalDateTime data) {
+		LocalDateTime data,
+		Especialidade especialidade) {
 
 }

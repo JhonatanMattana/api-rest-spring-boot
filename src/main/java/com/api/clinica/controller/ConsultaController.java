@@ -1,5 +1,6 @@
 package com.api.clinica.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.clinica.dto.consulta.DadosAgendamentoConsulta;
 import com.api.clinica.dto.consulta.DadosDetalhamentoConsulta;
+import com.api.clinica.service.AgendaDeConsultas;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -16,10 +18,13 @@ import jakarta.validation.Valid;
 @RequestMapping("consultas")
 public class ConsultaController {
 
+	@Autowired
+	private AgendaDeConsultas agenda;
+	
 	@PostMapping
 	@Transactional
 	public ResponseEntity<?> agendar(@RequestBody @Valid DadosAgendamentoConsulta dados) {
-		System.out.println(dados);
+		agenda.agendar(dados);
 		return ResponseEntity.ok(new DadosDetalhamentoConsulta(null, null, null, null));
 	}
 	
