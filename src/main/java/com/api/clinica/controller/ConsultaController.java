@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.clinica.dto.consulta.DadosAgendamentoConsulta;
-import com.api.clinica.dto.consulta.DadosDetalhamentoConsulta;
 import com.api.clinica.service.AgendaDeConsultas;
 
 import jakarta.transaction.Transactional;
@@ -24,8 +23,8 @@ public class ConsultaController {
 	@PostMapping
 	@Transactional
 	public ResponseEntity<?> agendar(@RequestBody @Valid DadosAgendamentoConsulta dados) {
-		agenda.agendar(dados);
-		return ResponseEntity.ok(new DadosDetalhamentoConsulta(null, null, null, null));
+		var dto = agenda.agendar(dados);
+		return ResponseEntity.ok(dto);
 	}
 	
 }
