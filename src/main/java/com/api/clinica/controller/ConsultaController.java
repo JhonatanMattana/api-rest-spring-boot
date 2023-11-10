@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.clinica.dto.consulta.DadosAgendamentoConsulta;
 import com.api.clinica.service.AgendaDeConsultas;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("consultas")
+@SecurityRequirement(name = "bearer-key")
 public class ConsultaController {
 
 	@Autowired

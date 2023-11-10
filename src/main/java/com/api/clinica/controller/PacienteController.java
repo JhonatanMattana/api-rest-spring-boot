@@ -23,10 +23,12 @@ import com.api.clinica.dto.paciente.DadosListagemPaciente;
 import com.api.clinica.model.Paciente;
 import com.api.clinica.repository.PacienteRepository;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("pacientes")
+@SecurityRequirement(name = "bearer-key")
 public class PacienteController {
 
 	@Autowired

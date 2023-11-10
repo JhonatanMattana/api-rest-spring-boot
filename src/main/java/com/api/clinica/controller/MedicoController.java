@@ -22,10 +22,12 @@ import com.api.clinica.dto.medico.DadosListagemMedico;
 import com.api.clinica.model.Medico;
 import com.api.clinica.service.MedicoService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/medicos")
+@SecurityRequirement(name = "bearer-key")
 public class MedicoController {
 
 	@Autowired
