@@ -14,5 +14,3 @@
 * Princípios SOLID
 * API documentada seguindo o padrão OpenAPI
 * Testes automatizados com Spring Boot
-* Build com Spring Boot
-* Variáveis de ambiente em produção para o deploy
